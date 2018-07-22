@@ -1,6 +1,6 @@
 # coding: utf-8
 
-import tweepy, jsonify
+import tweepy
 from tweepy import OAuthHandler
 from textblob import TextBlob as tb
 import pandas as pd
@@ -14,8 +14,8 @@ auth = tweepy.OAuthHandler(consumerKey, consumerSecret)
 auth.set_access_token(accessToken, accessTokenSecret)
 api = tweepy.API(auth)
 
-def scrape_tweet(searchTweet, tweet_num):
-    tweets = tweepy.Cursor(api.search, q=searchTweet).items(tweet_num)
+def scrape_tweet(searchTweet):
+    tweets = tweepy.Cursor(api.search, q=searchTweet).items(100)
     data=[]
 
     for tweet in tweets:
@@ -41,32 +41,32 @@ def scrape_tweet(searchTweet, tweet_num):
     train = pd.read_csv('devclan.csv',index_col=0)
     train = train['Sentiment']
     train.to_json('devclan.json')
-    # train_json = pd.read_json('devclan.json')
-    # positive = train['Sentiment'] == 'Positive'
-    # negative = train['Sentiment'] == 'Negative'
-    # neutral = train['Sentiment'] == 'Neutral'
-    # time = train['Tweettime']
-    # Sentiment = train['Sentiment']
+    train_json = pd.read_json('devclan.json')
+    positive = train['Sentiment'] == 'Positive'
+    negative = train['Sentiment'] == 'Negative'
+    neutral = train['Sentiment'] == 'Neutral'
+    time = train['Tweettime']
+    Sentiment = train['Sentiment']
 
-    # size = train['Sentiment'].value_counts().tolist()
-    # sice = Sentiment.tolist()
-    # labels = list(set(sice))
+    size = train['Sentiment'].value_counts().tolist()
+    sice = Sentiment.tolist()
+    labels = list(set(sice))
 
-    # colors = ['yellow', 'blue', 'red']
-    # explode = (0.1, 0.1, 0.1)
-    # explode_list = list(explode)
-    # if len(labels) == 2:
-    #     colors = colors[:2]
-    #     explode = explode[:2]
-    # elif len(labels) == 3:
-    #     colors = colors
-    #     explode = explode
-    # elif len(labels) == 1:
-    #     colors = colors[:1]
-    #     explode = explode[:1]
+    colors = ['yellow', 'blue', 'red']
+    explode = (0.1, 0.1, 0.1)
+    explode_list = list(explode)
+    if len(labels) == 2:
+        colors = colors[:2]
+        explode = explode[:2]
+    elif len(labels) == 3:
+        colors = colors
+        explode = explode
+    elif len(labels) == 1:
+        colors = colors[:1]
+        explode = explode[:1]
 
-    # plt.pie(size, colors=colors, labels=labels, shadow=True, startangle= 90, autopct='%1.1f%%', explode = explode)
-    # plt.legend(labels)
-    # return plt.show()
-    return train_json
+    plt.pie(size, colors=colors, labels=labels, shadow=True, startangle= 90, autopct='%1.1f%%', explode = explode)
+    plt.legend(labels)
+    return plt.show()
+    #return train_json
 
