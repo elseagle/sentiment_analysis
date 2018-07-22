@@ -13,7 +13,7 @@ ns = api.namespace('api_server', 'Returns sentiments on string on twitter')
 model_input = api.model('Enter the keyword and no of tweets:', {"Keyword": fields.String()})
 port = int(os.getenv('PORT', 8080)) 
 
-@ns.route('/sieve', methods=['GET']) 
+@ns.route('/sieve') 
 class SIEVE(Resource): 
     @api.response(200, "Success", model_input)   
     @api.expect(model_input)
