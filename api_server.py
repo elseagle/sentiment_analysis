@@ -19,7 +19,7 @@ class SIEVE(Resource):
     @api.expect(model_input)
     def post(self):
         parser = reqparse.RequestParser()
-        parser.add_argument('Sentiment', type=int)
+        parser.add_argument('Sentiment', type=str)
         args = parser.parse_args()
         inp = str(args["Keyword"]) 
         result = sc(inp)
