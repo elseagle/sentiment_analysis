@@ -1,6 +1,6 @@
 # coding: utf-8
 
-import tweepy, jsonify
+import tweepy
 from tweepy import OAuthHandler
 from textblob import TextBlob as tb
 import pandas as pd
