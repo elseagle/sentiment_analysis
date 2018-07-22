@@ -7,6 +7,7 @@ connexion==1.4.2
 cycler==0.10.0
 Flask==1.0.2
 Flask-RESTful==0.3.6
+flask-restplus==0.11.0
 gunicorn==19.9.0
 idna==2.7
 inflection==0.3.1
