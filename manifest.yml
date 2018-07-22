@@ -1,0 +1,4 @@
+ --- applications:
+ - name: api_server
+ - random-route: true
+ - memory: 256M
