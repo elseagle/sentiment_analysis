@@ -1,6 +1,7 @@
 from flask import Flask, Response, jsonify 
 from flask_restplus import Api, Resource, fields, reqparse 
-from flask_cors import CORS, cross_origin import os 
+from flask_cors import CORS, cross_origin
+import os 
 from twittersentimentanaysis-Copy1 import scrape_tweet as sc
 
 app = Flask(__name__)
@@ -11,8 +12,8 @@ ns = api.namespace('api_server', 'Returns sentiments on string on twitter')
 
 model_input = api.model('Enter the keyword and no of tweets:', {"Keyword": fields.String()}, {"No_of_tweets:" fields.Integer()}) 
 port = int(os.getenv('PORT', 8080)) 
+
 @ns.route('/sieve', methods=['GET']) 
-# the endpoint 
 class SIEVE(Resource): 
     @api.response(200, "Success", model_input)   
     @api.expect(model_input)
