@@ -2,6 +2,7 @@ from flask import Flask, Response, jsonify
 from flask_restplus import Api, Resource, fields, reqparse 
 from flask_cors import CORS, cross_origin
 import os 
+
 from twittersentimentanaysis-Copy1 import scrape_tweet as sc
 
 app = Flask(__name__)
