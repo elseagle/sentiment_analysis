@@ -11,7 +11,7 @@ api = Api(app, version='1.0', title='API for sentiment analysis', validate=False
 ns = api.namespace('api_server', 'Returns sentiments on string on twitter')
 
 model_input = api.model('Enter the company or celebrity here', {"Sentiment": fields.String()})
-port = int(os.getenv('PORT', 8080)) 
+#port = int(os.getenv('PORT', 8080)) 
 
 @ns.route('/sentiment') 
 class Sentiment(Resource): 
