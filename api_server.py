@@ -21,9 +21,9 @@ class SIEVE(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('Sentiment', type=str)
         args = parser.parse_args()
-        inp = str(args["Keyword"]) 
+        inp = str(args["Sentiment"]) 
         result = sc(inp)
-        return jsonify(result) 
+        return result
 if __name__=="__main__":
     app.run(host=os.getenv('IP', '0.0.0.0'), 
             port=int(os.getenv('PORT', 4444)))

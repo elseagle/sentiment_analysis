@@ -4,6 +4,7 @@ import tweepy
 from tweepy import OAuthHandler
 from textblob import TextBlob as tb
 import pandas as pd
+import json
 
 consumerKey = 'SV8UUKCsWGbHB0fBG9xEWdDDl'
 consumerSecret = 'gu7fZc75qzoZ20Cf1Y4FDSBGiX40H5L5dlMhmVqFecMZzUzBuo'
@@ -14,8 +15,8 @@ auth = tweepy.OAuthHandler(consumerKey, consumerSecret)
 auth.set_access_token(accessToken, accessTokenSecret)
 api = tweepy.API(auth)
 
-def scrape_tweet(searchTweet, tweet_num):
-    tweets = tweepy.Cursor(api.search, q=searchTweet).items(tweet_num)
+def scrape_tweet(searchTweet):
+    tweets = tweepy.Cursor(api.search, q=searchTweet).items(100)
     data=[]
 
     for tweet in tweets:
@@ -41,7 +42,10 @@ def scrape_tweet(searchTweet, tweet_num):
     train = pd.read_csv('devclan.csv',index_col=0)
     train = train['Sentiment']
     train.to_json('devclan.json')
-    # train_json = pd.read_json('devclan.json')
+    with open('devclan.json', 'r') as f:
+        train_json = json.load(f)
+
+
     # positive = train['Sentiment'] == 'Positive'
     # negative = train['Sentiment'] == 'Negative'
     # neutral = train['Sentiment'] == 'Neutral'
