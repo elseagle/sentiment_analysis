@@ -39,7 +39,7 @@ def scrape_tweet(searchTweet):
     df=pd.DataFrame(data)
     df.to_csv('devclan.csv')
 
-    train = pd.read_csv('devclan.csv',index_col=0)
+    train = pd.read_csv('devclan.csv', index_col=0)
     train = train['Sentiment']
     train.to_json('devclan.json')
     with open('devclan.json', 'r') as f:
