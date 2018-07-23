@@ -14,7 +14,7 @@ model_input = api.model('Enter the company or celebrity here', {"Sentiment": fie
 port = int(os.getenv('PORT', 8080)) 
 
 @ns.route('/sentiment') 
-class SIEVE(Resource): 
+class Sentiment(Resource): 
     @api.response(200, "Success", model_input)   
     @api.expect(model_input)
     def post(self):
