@@ -40,17 +40,18 @@ def scrape_tweet(searchTweet):
     df.to_csv('devclan.csv')
 
     train = pd.read_csv('devclan.csv', usecols = ['Sentiment','Tweettime'])
-    train.to_json('devclan.json')
+  
+    positive = train['Sentiment'] == 'Positive'
+    negative = train['Sentiment'] == 'Negative'
+    neutral = train['Sentiment'] == 'Neutral'
+    time = train['Tweettime']
+    Sentiment = train['Sentiment']
+
+    train = [train["Sentiment"], train["Tweettime"]]
+      train.to_json('devclan.json')
     with open('devclan.json', 'r') as f:
         train_json = json.load(f)
-
-
-    # positive = train['Sentiment'] == 'Positive'
-    # negative = train['Sentiment'] == 'Negative'
-    # neutral = train['Sentiment'] == 'Neutral'
-    # time = train['Tweettime']
-    # Sentiment = train['Sentiment']
-
+#####################################################################################################################
     # size = train['Sentiment'].value_counts().tolist()
     # sice = Sentiment.tolist()
     # labels = list(set(sice))
@@ -70,6 +71,6 @@ def scrape_tweet(searchTweet):
 
     # plt.pie(size, colors=colors, labels=labels, shadow=True, startangle= 90, autopct='%1.1f%%', explode = explode)
     # plt.legend(labels)
-    # return plt.show()
+    #return plt.show()
     return train_json
 
