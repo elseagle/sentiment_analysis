@@ -39,19 +39,44 @@ def scrape_tweet(searchTweet):
     df=pd.DataFrame(data)
     df.to_csv('devclan.csv')
 
-    train = pd.read_csv('devclan.csv', usecols = ['Sentiment','Tweettime'])
-  
-    positive = train['Sentiment'] == 'Positive'
-    negative = train['Sentiment'] == 'Negative'
-    neutral = train['Sentiment'] == 'Neutral'
-    time = train['Tweettime']
-    Sentiment = train['Sentiment']
+    train = pd.read_csv('devclan.csv', usecols = ['Sentiment'])
+    #  open('devclan.json', 'r') as f:
+    #     train_json = json.loatrain.to_json('devclan.json')
+    # withd(f)
 
-    train = [train["Sentiment"], train["Tweettime"]]
-      train.to_json('devclan.json')
-    with open('devclan.json', 'r') as f:
-        train_json = json.load(f)
-#####################################################################################################################
+
+    # positive = train['Sentiment'] == 'Positive'
+    # negative = train['Sentiment'] == 'Negative'
+    # neutral = train['Sentiment'] == 'Neutral'
+    Sentiment = train["Sentiment"]
+    size = Sentiment.tolist()
+    total = len(size)
+    pos = size.count("Positive")
+    neg = size.count("Negative")
+    neu = size.count("Neutral")
+    per_pos = float(pos/total* 100)
+    per_neg = float(neg/total* 100) 
+    per_neu = float(neu/total* 100)
+    train_json = json.dumps(
+                                {"percentages": 
+                                    {
+                                        "positive": round(per_pos, 3),
+                                        "negative":round(per_neg, 3), 
+                                        "neutral":round(per_neu, 3)
+                                    }
+
+
+                                }
+                            )
+   
+   
+   
+   
+   
+   
+   # time = train['Tweettime']
+    # Sentiment = train['Sentiment']
+
     # size = train['Sentiment'].value_counts().tolist()
     # sice = Sentiment.tolist()
     # labels = list(set(sice))
@@ -71,6 +96,9 @@ def scrape_tweet(searchTweet):
 
     # plt.pie(size, colors=colors, labels=labels, shadow=True, startangle= 90, autopct='%1.1f%%', explode = explode)
     # plt.legend(labels)
-    #return plt.show()
+    # return plt.show()
+    
     return train_json
+
+
 
