@@ -5,6 +5,7 @@ from tweepy import OAuthHandler
 from textblob import TextBlob as tb
 import pandas as pd
 import json
+from flask import jsonify
 
 consumerKey = 'SV8UUKCsWGbHB0fBG9xEWdDDl'
 consumerSecret = 'gu7fZc75qzoZ20Cf1Y4FDSBGiX40H5L5dlMhmVqFecMZzUzBuo'
@@ -57,17 +58,14 @@ def scrape_tweet(searchTweet):
     per_pos = float(pos/total* 100)
     per_neg = float(neg/total* 100) 
     per_neu = float(neu/total* 100)
-    train_json = json.dumps(
-                                {"percentages": 
-                                    {
-                                        "positive": round(per_pos, 3),
-                                        "negative":round(per_neg, 3), 
-                                        "neutral":round(per_neu, 3)
-                                    }
-
-
-                                }
-                            )
+    train_json = {"percentages": 
+                    {
+                    "positive": round(per_pos, 3),
+                    "negative":round(per_neg, 3), 
+                    "neutral":round(per_neu, 3)
+                    }   
+                }
+    train_json = jsonify(train_json)
    
    
    
