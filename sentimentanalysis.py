@@ -16,8 +16,8 @@ auth = tweepy.OAuthHandler(consumerKey, consumerSecret)
 auth.set_access_token(accessToken, accessTokenSecret)
 api = tweepy.API(auth)
 
-def scrape_tweet(searchTweet):
-    tweets = tweepy.Cursor(api.search, q=searchTweet).items(100)
+def scrape_tweet(searchTweet, no_of_tweet):
+    tweets = tweepy.Cursor(api.search, q=searchTweet).items(no_of_tweet)
     data=[]
 
     for tweet in tweets:
@@ -40,7 +40,7 @@ def scrape_tweet(searchTweet):
     df=pd.DataFrame(data)
     df.to_csv('devclan.csv')
 
-    train = pd.read_csv('devclan.csv', usecols = ['Sentiment'])
+    train = pd.read_csv('devclan.csv', usecols = ['Sentiment', "Tweettime"])
     #  open('devclan.json', 'r') as f:
     #     train_json = json.loatrain.to_json('devclan.json')
     # withd(f)
@@ -66,10 +66,6 @@ def scrape_tweet(searchTweet):
                     }   
                 }
     train_json = jsonify(train_json)
-   
-   
-   
-   
    
    
    # time = train['Tweettime']
