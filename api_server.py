@@ -10,7 +10,7 @@ CORS(app)
 api = Api(app, version='1.0', title='API for sentiment analysis', validate=False) 
 ns = api.namespace('api_server', 'Returns sentiments on string on twitter')
 
-model_input = api.model('Enter the company or celebrity here', {"Sentiment": fields.String(), "Number": fields.Integer()})
+model_input = api.model('Enter the company or celebrity here', {"Sentiment": fields.String(), "Number": fields.String()})
 #port = int(os.getenv('PORT', 8080)) 
 
 @ns.route('/sentiment') 
@@ -20,10 +20,11 @@ class Sentiment(Resource):
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument('Sentiment', type=str)
-        parser.add_argument('Number', type =int)
+        parser.add_argument('Number', type =str)
         args = parser.parse_args()
+        
         inp = str(args["Sentiment"])
-        inp2 = int(args["Number"]) 
+        inp2 = str(args["Number"]) 
         result = sc(inp, inp2)
         return result
 if __name__=="__main__":
