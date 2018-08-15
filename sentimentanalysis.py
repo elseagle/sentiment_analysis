@@ -20,7 +20,11 @@ auth.set_access_token(accessToken, accessTokenSecret)
 api = tweepy.API(auth)
 
 def scrape_tweet(searchTweet, no_of_tweet):
-    tweets = tweepy.Cursor(api.search, q=searchTweet).items(no_of_tweet)
+    try:
+        tweets = tweepy.Cursor(api.search, q=searchTweet).items(no_of_tweet)
+    except tweepy.error.TweepError:
+        print("Too many requests")
+
     data=[]
 
     for tweet in tweets:
@@ -72,7 +76,8 @@ def scrape_tweet(searchTweet, no_of_tweet):
     train_json = jsonify(train_json)
    
    
-   # time = train['Tweettime']
+   # time = train['Tweettime'] .
+   
     # Sentiment = train['Sentiment']
 
     # size = train['Sentiment'].value_counts().tolist()
