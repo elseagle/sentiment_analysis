@@ -5,7 +5,7 @@ An api that helps to get sentiments about companies and celebrities
 
 url = "https://api-devclan.herokuapp.com/api_server/sentiment"
 
-payload = {'Sentiment': **'name_of_celebrity_or_company'**, 'Number': **no_of _tweet**} `limit=400`
+payload = {'Sentiment': "**name_of_celebrity_or_company**", 'Number': "**no_of _tweet**"} `limit=700`
 
 r = request.post(url, data=payload)
 

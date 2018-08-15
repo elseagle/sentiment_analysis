@@ -21,7 +21,7 @@ api = tweepy.API(auth)
 
 def scrape_tweet(searchTweet, no_of_tweet):
     try:
-        tweets = tweepy.Cursor(api.search, q=searchTweet).items(no_of_tweet)
+        tweets = tweepy.Cursor(api.search, q=searchTweet).items(float(no_of_tweet))
     except tweepy.error.TweepError:
         print("Too many requests")
 
